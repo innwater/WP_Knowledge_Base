@@ -771,7 +771,7 @@ function renderFaqListV25(){
                ondrop="faqMainDrop(event)"
                ondragend="faqDragEnd(event)">
             <span class="caret" onclick="event.stopPropagation();toggleFaqMain('${esc(main)}')">${collapsed ? "▸" : "▾"}</span>
-            <span onclick="toggleFaqMain('${esc(main)}')">📌 ${esc(main)}</span>
+            <span onclick="event.stopPropagation(); toggleFaqMain('${esc(main)}')">📌 ${esc(main)}</span>
           </div>
           <div class="${collapsed ? "hidden" : ""}">
       `;
@@ -816,6 +816,10 @@ function renderFaqListV25(){
 }
 
 function faqMainDragStart(event){
+  if(event.target.classList.contains("caret")){
+    event.preventDefault();
+    return;
+  }
   draggedFaqMain = event.currentTarget.dataset.faqMain;
   event.currentTarget.classList.add("canned-title-dragging");
 }
