@@ -361,7 +361,14 @@ body.section-faq .toolbar-import-btn{
   </main>
 </div>
 
-<div id="modalBackdrop" class="modal-backdrop"><div class="modal"><h2 id="modalTitle">新增資料</h2><div class="form-row"><label>資料類型</label><select id="formType" onchange="switchFormType()"><option value="faq">客戶版 FAQ</option><option value="sop">新人內部 SOP</option><option value="case">平台案例庫</option><option value="people">人員通訊錄</option></select></div><input type="hidden" id="formId" /><div id="commonFields"><input id="formCategory" type="hidden" value="FAQ" /><div class="form-grid"><div class="form-row"><label>平台（可複選，也可直接輸入新增）</label>
+<div id="modalBackdrop" class="modal-backdrop"><div class="modal"><h2 id="modalTitle">新增資料</h2><div class="form-row"><label>資料類型</label><select id="formType" onchange="switchFormType()"><option value="faq">客戶版 FAQ</option><option value="sop">新人內部 SOP</option><option value="case">平台案例庫</option><option value="people">人員通訊錄</option></select></div><input type="hidden" id="formId" /><div id="commonFields"><div class="form-row">
+<div class="form-row">
+  <label>分類 / 類型</label>
+  <input id="formCategory" list="categoryOptions"
+         placeholder="可選既有分類，或直接輸入新分類" />
+  <datalist id="categoryOptions"></datalist>
+</div>
+<div class="form-grid"><div class="form-row"><label>平台（可複選，也可直接輸入新增）</label>
       <div class="multi-select-box">
         <div id="selectedPlatformChips" class="chip-list"></div>
         <input id="formPlatformInput" list="platformOptions" placeholder="輸入平台後按 Enter，例如 ME、DO、COCO777" onkeydown="handlePlatformInputKey(event)" />
@@ -699,198 +706,198 @@ renderAll();
 </script>
 
 <script>
-/* ===== V25 FAQ重構 ===== */
-if(!data.ui.faqMainOrder) data.ui.faqMainOrder={};
-if(!data.ui.faqItemOrder) data.ui.faqItemOrder={};
+/* ===== V25.4 FAQ分類拖曳排序版 ===== */
+if(!data.ui.faqMainOrder) data.ui.faqMainOrder = {};
+if(!data.ui.faqItemOrder) data.ui.faqItemOrder = {};
+if(!data.ui.collapsedFaqMain) data.ui.collapsedFaqMain = {};
 
 function getFaqMain(title){
-  return (title && title.trim()) || "未分類";
-}
-function getFaqMainOrder(title){
-  title=getFaqMain(title);
-  if(data.ui.faqMainOrder[title]===undefined){
-    data.ui.faqMainOrder[title]=Object.keys(data.ui.faqMainOrder).length+1;
-  }
-  return data.ui.faqMainOrder[title];
-}
-function getFaqItemOrder(item){
-  if(data.ui.faqItemOrder[item.id]===undefined){
-    data.ui.faqItemOrder[item.id]=999;
-  }
-  return data.ui.faqItemOrder[item.id];
+  return (title && String(title).trim()) || "未分類";
 }
 
-let draggedFaqMain=null;
-let draggedFaqItem=null;
+function getFaqMainOrder(title){
+  title = getFaqMain(title);
+  if(data.ui.faqMainOrder[title] === undefined){
+    const existingOrders = Object.values(data.ui.faqMainOrder).map(Number).filter(Boolean);
+    data.ui.faqMainOrder[title] = existingOrders.length ? Math.max(...existingOrders) + 1 : 1;
+  }
+  return Number(data.ui.faqMainOrder[title]) || 9999;
+}
+
+function getFaqItemOrder(item){
+  if(data.ui.faqItemOrder[item.id] === undefined){
+    data.ui.faqItemOrder[item.id] = 999;
+  }
+  return Number(data.ui.faqItemOrder[item.id]) || 999;
+}
+
+function toggleFaqMain(main){
+  main = getFaqMain(main);
+  data.ui.collapsedFaqMain[main] = !data.ui.collapsedFaqMain[main];
+  saveData();
+}
+
+let draggedFaqMain = null;
+let draggedFaqItem = null;
 
 function renderFaqListV25(){
-  const box=document.getElementById("faqList");
+  const box = document.getElementById("faqList");
   if(!box) return;
 
-  const list=(data.faq||[]).filter(match);
+  const list = (data.faq || []).filter(match);
 
-  const grouped={};
-  list.forEach(x=>{
-    const main=getFaqMain(x.mainTitle || x.category);
+  const grouped = {};
+  list.forEach(item => {
+    const main = getFaqMain(item.category);
     grouped[main] ??= [];
-    grouped[main].push(x);
+    grouped[main].push(item);
+    getFaqMainOrder(main);
   });
 
-  let html="";
+  let html = "";
 
   Object.keys(grouped)
-    .sort((a,b)=>getFaqMainOrder(a)-getFaqMainOrder(b))
-    .forEach(main=>{
+    .sort((a,b) => getFaqMainOrder(a) - getFaqMainOrder(b))
+    .forEach(main => {
+      const collapsed = !!data.ui.collapsedFaqMain[main];
 
-      html+=`
-      <div style="margin-bottom:18px">
-        <div class="canned-main-title"
-             draggable="true"
-             data-faq-main="${main}"
-             ondragstart="faqMainDragStart(event)"
-             ondragover="event.preventDefault()"
-             ondrop="faqMainDrop(event)">
-          📌 ${main}
-        </div>`;
+      html += `
+        <div class="faq-main-block" style="margin-bottom:18px">
+          <div class="canned-main-title"
+               draggable="true"
+               data-faq-main="${esc(main)}"
+               ondragstart="faqMainDragStart(event)"
+               ondragover="event.preventDefault()"
+               ondrop="faqMainDrop(event)"
+               ondragend="faqDragEnd(event)">
+            <span class="caret" onclick="event.stopPropagation();toggleFaqMain('${esc(main)}')">${collapsed ? "▸" : "▾"}</span>
+            <span onclick="toggleFaqMain('${esc(main)}')">📌 ${esc(main)}</span>
+          </div>
+          <div class="${collapsed ? "hidden" : ""}">
+      `;
 
       grouped[main]
-        .sort((a,b)=>getFaqItemOrder(a)-getFaqItemOrder(b))
-        .forEach((item,idx)=>{
-
-          html+=`
-          <details draggable="true"
-                   data-faq-id="${item.id}"
-                   data-faq-main="${main}"
-                   ondragstart="faqItemDragStart(event)"
-                   ondragover="event.preventDefault()"
-                   ondrop="faqItemDrop(event)">
-            <summary>
-              <span class="drag-handle">☰</span>
-              <span class="qa-no">Q${idx+1}</span>
-              ${item.title||""}
-            </summary>
-            <div class="answer">
-              ${item.reason ? `<h4>原因</h4><div>${item.reason}</div>` : ""}
-              <h4>內容</h4>
-              <div>${item.content||""}</div>
-              ${(item.tags||[]).length ? `<div style="margin-top:10px">${item.tags.map(t=>'<span class="tag-chip">#'+t+'</span>').join('')}</div>`:''}
-              <div class="actions" style="margin-top:12px">
-                <button class="btn btn-light btn-small" onclick="openEditor('faq','${item.id}')">編輯</button>
-                <button class="btn btn-danger btn-small" onclick="deleteItem('faq','${item.id}')">刪除</button>
+        .sort((a,b) => getFaqItemOrder(a) - getFaqItemOrder(b))
+        .forEach((item,idx) => {
+          html += `
+            <details draggable="true"
+                     data-faq-id="${esc(item.id)}"
+                     data-faq-main="${esc(main)}"
+                     ondragstart="faqItemDragStart(event)"
+                     ondragover="event.preventDefault()"
+                     ondrop="faqItemDrop(event)"
+                     ondragend="faqDragEnd(event)">
+              <summary>
+                <span class="drag-handle">☰</span>
+                <span class="qa-no">Q${idx + 1}</span>
+                ${esc(item.title || "")}
+              </summary>
+              <div class="answer">
+                ${item.reason ? `<h4>原因</h4><div>${nl(item.reason)}</div>` : ""}
+                <h4>內容</h4>
+                <div>${nl(item.content || "")}</div>
+                ${(item.tags || []).length ? `<div style="margin-top:10px">${item.tags.map(t=>`<span class="tag-chip">#${esc(t)}</span>`).join("")}</div>` : ""}
+                <div class="actions" style="margin-top:12px">
+                  <button class="btn btn-light btn-small" onclick="openEditor('faq','${esc(item.id)}')">編輯</button>
+                  <button class="btn btn-danger btn-small" onclick="deleteItem('faq','${esc(item.id)}')">刪除</button>
+                </div>
               </div>
-            </div>
-          </details>`;
-      });
+            </details>
+          `;
+        });
 
-      html+="</div>";
+      html += `
+          </div>
+        </div>
+      `;
     });
 
   box.innerHTML = html || '<div class="card">沒有符合條件的 FAQ。</div>';
 }
 
-function faqMainDragStart(e){
-  draggedFaqMain=e.currentTarget.dataset.faqMain;
+function faqMainDragStart(event){
+  draggedFaqMain = event.currentTarget.dataset.faqMain;
+  event.currentTarget.classList.add("canned-title-dragging");
 }
-function faqMainDrop(e){
-  const target=e.currentTarget.dataset.faqMain;
-  if(!draggedFaqMain || draggedFaqMain===target) return;
 
-  const arr=[...new Set((data.faq||[]).map(x=>getFaqMain(x.mainTitle)))]
-      .sort((a,b)=>getFaqMainOrder(a)-getFaqMainOrder(b));
+function faqMainDrop(event){
+  event.preventDefault();
 
-  const from=arr.indexOf(draggedFaqMain);
-  const to=arr.indexOf(target);
+  const target = event.currentTarget.dataset.faqMain;
+  if(!draggedFaqMain || draggedFaqMain === target) return;
 
-  const m=arr.splice(from,1)[0];
-  arr.splice(to,0,m);
+  const mains = [...new Set((data.faq || []).map(x => getFaqMain(x.category)))]
+    .sort((a,b) => getFaqMainOrder(a) - getFaqMainOrder(b));
 
-  arr.forEach((x,i)=>data.ui.faqMainOrder[x]=i+1);
+  const from = mains.indexOf(draggedFaqMain);
+  const to = mains.indexOf(target);
+
+  if(from < 0 || to < 0) return;
+
+  const moved = mains.splice(from,1)[0];
+  mains.splice(to,0,moved);
+
+  mains.forEach((main,index) => {
+    data.ui.faqMainOrder[main] = index + 1;
+  });
+
   saveData();
 }
 
-function faqItemDragStart(e){
-  draggedFaqItem=e.currentTarget.dataset.faqId;
+function faqItemDragStart(event){
+  draggedFaqItem = event.currentTarget.dataset.faqId;
+  event.currentTarget.classList.add("dragging");
 }
-function faqItemDrop(e){
-  const targetId=e.currentTarget.dataset.faqId;
 
-  const drag=(data.faq||[]).find(x=>x.id===draggedFaqItem);
-  const target=(data.faq||[]).find(x=>x.id===targetId);
+function faqItemDrop(event){
+  event.preventDefault();
+
+  const targetId = event.currentTarget.dataset.faqId;
+
+  const drag = (data.faq || []).find(x => x.id === draggedFaqItem);
+  const target = (data.faq || []).find(x => x.id === targetId);
 
   if(!drag || !target) return;
 
-  if(getFaqMain(drag.mainTitle || drag.category)!==getFaqMain(target.mainTitle || target.category)){
-    showToast("只能在同一大標題內排序");
+  const dragMain = getFaqMain(drag.category);
+  const targetMain = getFaqMain(target.category);
+
+  if(dragMain !== targetMain){
+    showToast("只能在同一分類內排序");
     return;
   }
 
-  const main=getFaqMain(drag.mainTitle || drag.category);
+  const group = (data.faq || [])
+    .filter(x => getFaqMain(x.category) === dragMain)
+    .sort((a,b) => getFaqItemOrder(a) - getFaqItemOrder(b));
 
-  const group=(data.faq||[])
-      .filter(x=>getFaqMain(x.mainTitle)===main)
-      .sort((a,b)=>getFaqItemOrder(a)-getFaqItemOrder(b));
+  const from = group.findIndex(x => x.id === drag.id);
+  const to = group.findIndex(x => x.id === target.id);
 
-  const from=group.findIndex(x=>x.id===drag.id);
-  const to=group.findIndex(x=>x.id===target.id);
+  if(from < 0 || to < 0 || from === to) return;
 
-  const m=group.splice(from,1)[0];
-  group.splice(to,0,m);
+  const moved = group.splice(from,1)[0];
+  group.splice(to,0,moved);
 
-  group.forEach((x,i)=>data.ui.faqItemOrder[x.id]=i+1);
+  group.forEach((item,index) => {
+    data.ui.faqItemOrder[item.id] = index + 1;
+  });
+
   saveData();
 }
 
-const oldOpenEditor=openEditor;
-openEditor=function(type="faq",itemId=null){
-  oldOpenEditor(type,itemId);
-
-  if(type==="faq"){
-    const catRow=document.getElementById("formCategory").closest(".form-row");
-    if(catRow && !document.getElementById("faqMainTitle")){
-      catRow.insertAdjacentHTML("beforebegin",
-        '<div class="form-row"><label>大標題</label><input id="faqMainTitle" placeholder="支付問題、提款問題..."></div>'
-      );
-    }
-
-    if(itemId){
-      const item=(data.faq||[]).find(x=>x.id===itemId);
-      if(item && document.getElementById("faqMainTitle")){
-        document.getElementById("faqMainTitle").value=item.mainTitle||"";
-      }
-    }
-  }
+function faqDragEnd(event){
+  event.currentTarget.classList.remove("dragging");
+  event.currentTarget.classList.remove("canned-title-dragging");
+  draggedFaqMain = null;
+  draggedFaqItem = null;
 }
 
-const oldSaveItem=saveItem;
-saveItem=function(){
-  const type=document.getElementById("formType").value;
-
-  if(type==="faq"){
-    const oldId=document.getElementById("formId").value;
-    const mainTitle=document.getElementById("faqMainTitle")?.value || "";
-
-    if(oldId){
-      const item=data.faq.find(x=>x.id===oldId);
-      if(item) item.mainTitle=mainTitle;
-    }
-  }
-
-  oldSaveItem();
-
-  if(type==="faq"){
-    const last=data.faq[data.faq.length-1];
-    if(last && document.getElementById("faqMainTitle")){
-      last.mainTitle=document.getElementById("faqMainTitle").value||"";
-      localStorage.setItem(STORAGE_KEY,JSON.stringify(data));
-    }
-  }
-}
-
-const oldRenderAll=renderAll;
-renderAll=function(){
+const oldRenderAll = renderAll;
+renderAll = function(){
   oldRenderAll();
   renderFaqListV25();
-}
+};
 </script>
 
 </body></html>
