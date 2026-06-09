@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>包網客服知識庫 V25.2 FAQ修正版</title>
+<style>
+:root{--bg:#f6f8fb;--card:#fff;--text:#1f2937;--muted:#6b7280;--brand:#2aa889;--brand-dark:#08735d;--brand-light:#e8f7f3;--line:#e5e7eb;--blue:#eaf3ff;--blue-text:#1f5f99;--purple:#f1ecff;--purple-text:#5b35a8}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);font-family:"Microsoft JhengHei","Noto Sans TC",Arial,sans-serif;color:var(--text)}
+.app{display:flex;min-height:100vh}.sidebar{width:300px;background:#fff;border-right:1px solid var(--line);padding:24px 18px;position:sticky;top:0;height:100vh;overflow:auto}
+.logo{font-size:22px;font-weight:800;margin-bottom:6px}.version{font-size:13px;color:var(--muted);margin-bottom:22px;line-height:1.5}
+.nav-title{font-size:13px;color:#6b7280;font-weight:900;margin:18px 8px 8px;letter-spacing:.5px}.nav button{width:100%;text-align:left;border:0;background:transparent;padding:12px 14px;border-radius:12px;font-size:15px;cursor:pointer;color:#374151;margin-bottom:6px;display:flex;gap:8px;align-items:center}
+.nav button.active,.nav button:hover{background:var(--brand-light);color:var(--brand-dark);font-weight:700}
+.main{flex:1;padding:30px;max-width:1250px;margin:auto}.hero{background:linear-gradient(135deg,#e8f7f3,#fff);border:1px solid #d6efe8;border-radius:22px;padding:28px;margin-bottom:22px}
+.hero h1{margin:0 0 8px;font-size:30px}.hero p{margin:0;color:var(--muted)}
+.toolbar{display:flex;gap:12px;margin:18px 0 24px;flex-wrap:wrap}.search,select,input,textarea{padding:12px 14px;border:1px solid var(--line);border-radius:12px;font-size:15px;font-family:inherit}
+.search{flex:1;min-width:260px}.btn{border:0;border-radius:12px;padding:11px 16px;cursor:pointer;font-weight:800;font-family:inherit}
+.btn-primary{background:var(--brand);color:white}.btn-light{background:#fff;border:1px solid var(--line);color:#374151}.btn-danger{background:#ef4444;color:white}.btn-warn{background:#f59e0b;color:white}.btn-small{padding:7px 10px;font-size:13px;border-radius:10px}
+.pill{display:inline-block;padding:5px 10px;border-radius:999px;background:var(--blue);color:var(--blue-text);font-size:13px;margin:3px 4px 3px 0;font-weight:700}.pill-purple{background:var(--purple);color:var(--purple-text)}
+.section{display:none}.section.active{display:block}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px;box-shadow:0 4px 16px rgba(0,0,0,.03);margin-bottom:16px}.card h3{margin:0 0 10px;font-size:18px}
+details{background:#fff;border:1px solid var(--line);border-radius:16px;margin:12px 0;overflow:hidden}summary{cursor:pointer;padding:16px 18px;font-weight:800;list-style:none;display:flex;align-items:center;gap:10px}summary::-webkit-details-marker{display:none}summary:after{content:"⌄";margin-left:auto;color:#6b7280;font-size:20px}details[open] summary:after{content:"⌃"}.answer{padding:0 18px 18px;color:#374151;line-height:1.75}.qa-no{background:var(--blue);color:var(--blue-text);border-radius:10px;padding:4px 8px;font-weight:800}
+table{width:100%;border-collapse:collapse;background:#fff;border-radius:14px;overflow:hidden;margin:12px 0}th,td{border:1px solid var(--line);padding:10px 12px;text-align:left;vertical-align:top}th{background:#f3f4f6}.small{font-size:13px;color:var(--muted)}.locked-badge{display:inline-flex;align-items:center;gap:5px;color:#08735d;background:#e8f7f3;padding:7px 10px;border-radius:10px;font-weight:800;white-space:nowrap}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.form-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}.form-row{margin-bottom:12px}.form-row label{display:block;font-weight:800;margin-bottom:6px}textarea{width:100%;min-height:110px;resize:vertical}input,select{width:100%}.hidden{display:none!important}
+.footer{color:var(--muted);font-size:13px;text-align:center;margin-top:30px}.modal-backdrop{display:none;position:fixed;inset:0;background:rgba(0,0,0,.35);z-index:10;align-items:center;justify-content:center;padding:20px}.modal{background:#fff;border-radius:20px;max-width:850px;width:100%;max-height:90vh;overflow:auto;padding:22px;box-shadow:0 20px 60px rgba(0,0,0,.25)}.modal h2{margin-top:0}
+.nav-editor-row{display:grid;grid-template-columns:70px 80px 1fr 1fr 130px 110px;gap:8px;align-items:center;margin:8px 0;padding:10px;border:1px solid var(--line);border-radius:14px;background:#fff}.nav-editor-row input,.nav-editor-row select{padding:9px 10px}
+.canned-main{margin-top:22px}.canned-main-title{font-size:24px;font-weight:900;margin:18px 0 12px;cursor:pointer;display:flex;gap:8px;align-items:center}.canned-main-title:hover{color:var(--brand-dark)}
+.canned-sub-title{font-size:18px;font-weight:900;margin:16px 0 10px;color:#374151;cursor:pointer;display:flex;gap:8px;align-items:center}.canned-sub-title:hover{color:var(--brand-dark)}
+.caret{display:inline-block;width:22px;text-align:center;color:#4b5563}.canned-list{display:grid;gap:12px}.canned-card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:15px;box-shadow:0 3px 12px rgba(0,0,0,.03)}.canned-card.dragging{opacity:.45;border:2px dashed var(--brand)}
+.canned-head{display:flex;align-items:center;gap:10px;justify-content:space-between}.canned-name{font-weight:900;font-size:17px}.drag-handle{cursor:grab;color:#9ca3af;font-weight:900;user-select:none}
+.canned-content{margin-top:10px;background:#f9fafb;border:1px dashed #cbd5e1;border-radius:12px;padding:12px;line-height:1.75;white-space:pre-wrap;cursor:pointer}.canned-content:hover{background:#f3f4f6}
+.toast{position:fixed;bottom:22px;right:22px;background:#111827;color:white;padding:12px 16px;border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,.25);display:none;z-index:20}
+.combo-wrap{position:relative}.suggestions{position:absolute;z-index:30;top:100%;left:0;right:0;background:#fff;border:1px solid var(--line);border-radius:12px;margin-top:4px;box-shadow:0 10px 26px rgba(0,0,0,.12);max-height:180px;overflow:auto;display:none}.suggestions div{padding:10px 12px;cursor:pointer}.suggestions div:hover{background:var(--brand-light)}
+@media(max-width:1000px){.nav-editor-row{grid-template-columns:1fr}.app{display:block}.sidebar{position:relative;width:auto;height:auto}.main{padding:18px}.canned-head{align-items:flex-start;flex-direction:column}}
+
+
+/* V13 canned reply layout: single column, content beside name */
+#canned .card:first-child{padding:14px 16px;margin-bottom:12px}
+.canned-main{margin-top:12px}
+.canned-main-title{font-size:20px;margin:12px 0 8px;line-height:1.25}
+.canned-sub-title{font-size:16px;margin:8px 0 6px;line-height:1.25}
+.canned-list{display:block}
+.canned-card{padding:10px 12px;border-radius:14px;margin:8px 0}
+.canned-head{display:grid;grid-template-columns:minmax(160px,260px) minmax(360px,1fr) auto;gap:12px;align-items:start}
+.canned-titlebox{min-width:0}
+.canned-name{font-size:16px;line-height:1.45}
+.canned-card .small{font-size:12px;margin-top:4px}
+.canned-card .actions{margin-top:0;gap:6px;justify-content:flex-end}
+.canned-card .btn-small{padding:6px 9px;font-size:12px}
+.canned-content{margin-top:0;padding:9px 10px;line-height:1.55;max-height:76px;overflow:auto;white-space:pre-wrap}
+@media(max-width:980px){
+  .canned-head{grid-template-columns:1fr}
+  .canned-card .actions{justify-content:flex-start}
+  .canned-content{max-height:120px}
+}
+
+
+/* V14 hierarchy */
+.canned-sub-title,
+.sub-title,
+[class*="sub-title"]{
+    margin-left:32px !important;
+    color:#475569 !important;
+    font-size:0.95em !important;
+}
+.canned-sub-title .toggle,
+.sub-title .toggle{
+    margin-right:6px;
+}
+
+
+/* V15 */
+.canned-sub-title,
+.sub-title,
+[class*="sub-title"]{
+    margin-left:32px !important;
+}
+
+.canned-list{
+    margin-left:32px !important;
+}
+
+.canned-card{
+    margin:8px 0 !important;
+}
+
+.canned-card .small{
+    display:none !important;
+}
+
+.canned-titlebox{
+    display:flex !important;
+    align-items:center !important;
+    gap:8px !important;
+}
+
+.canned-titlebox .small{
+    display:inline !important;
+    color:#64748b !important;
+    font-size:12px !important;
+}
+
+
+/* V16 - 客服標答頁面隱藏全域資料按鈕 */
+body.section-canned .toolbar .btn-global-data,
+body.section-canned .toolbar .btn-export,
+body.section-canned .toolbar .btn-import{
+    display:none !important;
+}
+
+
+/* V17 reliable toolbar hiding on canned page is handled by JS with stable button classes */
+
+
+/* V18 */
+#cannedModalBackdrop .form-grid{display:block !important}
+#cannedModalBackdrop .form-row{margin-bottom:14px}
+#cannedModalBackdrop textarea{min-height:180px}
+.tag-chip{display:inline-block;background:#eaf3ff;color:#1f5f99;border-radius:999px;padding:3px 8px;margin:3px 4px 3px 0;font-size:12px;font-weight:800}
+.canned-tags{margin-top:4px}
+.tag-manager-list{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.tag-manager-item{display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--line);border-radius:999px;padding:7px 10px}
+
+
+/* V19 - compact canned reply modal */
+#cannedModalBackdrop{
+  align-items:flex-start !important;
+  padding-top:18px !important;
+}
+#cannedModalBackdrop .modal{
+  max-width:760px !important;
+  max-height:calc(100vh - 36px) !important;
+  padding:18px 22px !important;
+}
+#cannedModalBackdrop h2{
+  font-size:22px !important;
+  margin:0 0 12px !important;
+}
+#cannedModalBackdrop .form-row{
+  margin-bottom:9px !important;
+}
+#cannedModalBackdrop .form-row label{
+  margin-bottom:4px !important;
+  font-size:14px !important;
+}
+#cannedModalBackdrop input,
+#cannedModalBackdrop textarea{
+  padding:9px 12px !important;
+  font-size:14px !important;
+  border-radius:10px !important;
+}
+#cannedModalBackdrop textarea{
+  min-height:105px !important;
+  max-height:140px !important;
+}
+#cannedModalBackdrop .actions{
+  margin-top:8px !important;
+}
+#cannedModalBackdrop .btn{
+  padding:9px 14px !important;
+}
+
+
+/* V20 - draggable main/sub titles */
+.canned-main-title,
+.canned-sub-title{
+  user-select:none;
+}
+.canned-main-title[draggable="true"],
+.canned-sub-title[draggable="true"]{
+  cursor:grab;
+}
+.canned-title-dragging{
+  opacity:.45;
+  outline:2px dashed var(--brand);
+  border-radius:10px;
+}
+
+
+/* V22 stable fixes */
+body.section-faq .toolbar-canned-btn,
+body.section-faq .toolbar-export-btn,
+body.section-faq .toolbar-import-btn{
+  display:none !important;
+}
+#modalBackdrop{
+  align-items:flex-start !important;
+  padding-top:18px !important;
+}
+#modalBackdrop .modal{
+  max-width:760px !important;
+  max-height:calc(100vh - 36px) !important;
+  padding:18px 22px !important;
+}
+#modalBackdrop h2{
+  font-size:22px !important;
+  margin:0 0 12px !important;
+}
+#modalBackdrop .form-grid{
+  display:block !important;
+}
+#modalBackdrop .form-row{
+  margin-bottom:9px !important;
+}
+#modalBackdrop .form-row label{
+  margin-bottom:4px !important;
+  font-size:14px !important;
+}
+#modalBackdrop input,
+#modalBackdrop select,
+#modalBackdrop textarea{
+  padding:9px 12px !important;
+  font-size:14px !important;
+  border-radius:10px !important;
+}
+#modalBackdrop textarea{
+  min-height:88px !important;
+  max-height:120px !important;
+}
+#modalBackdrop .actions{
+  margin-top:8px !important;
+}
+#modalBackdrop .btn{
+  padding:9px 14px !important;
+}
+
+
+/* V23 - platform multi-select chips */
+.multi-select-box{
+  border:1px solid var(--line);
+  border-radius:10px;
+  padding:8px;
+  background:#fff;
+}
+.chip-list{
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px;
+  margin-bottom:6px;
+}
+.platform-chip{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  background:#eaf3ff;
+  color:#1f5f99;
+  border-radius:999px;
+  padding:5px 9px;
+  font-size:13px;
+  font-weight:800;
+}
+.platform-chip button{
+  border:0;
+  background:transparent;
+  cursor:pointer;
+  color:#1f5f99;
+  font-weight:900;
+  padding:0;
+}
+.platform-option-list{
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px;
+  margin-top:8px;
+}
+.platform-option{
+  border:1px solid var(--line);
+  background:#fff;
+  border-radius:999px;
+  padding:6px 10px;
+  cursor:pointer;
+  font-size:13px;
+}
+.platform-option:hover{
+  background:var(--brand-light);
+  color:var(--brand-dark);
+}
+
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar">
+    <div class="logo" id="siteTitle">📚 包網客服知識庫</div>
+    <div class="version" id="siteSubtitle">V25.2 FAQ修正版｜ME / DO / MO / BE / COCO777</div>
+    <div class="nav" id="sideNav"></div>
+  </aside>
+  <main class="main">
+    <div class="hero">
+      <h1 id="heroTitle">包網客服知識庫 V23.0</h1>
+      <p id="heroDesc">客服標答維持上下排列，並將內容展示在名稱旁邊，方便快速瀏覽與複製。</p>
+      <div class="small" style="margin-top:10px">資料儲存在目前瀏覽器 LocalStorage。要換電腦或分享給別人，請先匯出 JSON。</div>
+    </div>
+    <div class="toolbar">
+      <input id="searchInput" class="search" autocomplete="off" placeholder="搜尋名稱、內容、標籤（支付、成功率、提款、風控...）" oninput="renderAll()" />
+      <button class="btn btn-primary toolbar-data-btn" onclick="openEditor()">＋新增資料</button>
+      <button class="btn btn-primary toolbar-canned-btn" onclick="openCannedEditor()">＋新增標答</button>
+      <button class="btn btn-light toolbar-export-btn" onclick="exportData()">匯出資料</button>
+      <button class="btn btn-light toolbar-import-btn" onclick="document.getElementById('importFile').click()">匯入資料</button>
+      <input id="importFile" type="file" accept=".json" class="hidden" onchange="importData(event)" />
+    </div>
+
+    <section id="canned" class="section active">
+      <div class="card">
+        <h3>💬 客服標答</h3>
+        <p class="small">大標題、小標題、同一小標題內標答皆可拖曳上下排序。</p>
+        <div class="actions"><button class="btn btn-primary" onclick="openCannedEditor()">＋新增標答</button><button class="btn btn-light" onclick="expandAllCanned()">全部展開</button><button class="btn btn-light" onclick="collapseAllCanned()">全部收合</button></div>
+      </div>
+      <div id="cannedList"></div>
+    </section>
+
+    <section id="faq" class="section"><div class="card"><h3>👤 客戶版 FAQ</h3></div><div id="faqList"></div></section>
+    <section id="sop" class="section"><div class="card"><h3>🏢 新人內部 SOP</h3></div><div id="sopList"></div></section>
+    <section id="cases" class="section"><div class="card"><h3>🗂️ 平台案例庫</h3></div><div id="caseList"></div></section>
+    <section id="people" class="section"><div class="card"><h3>👥 人員通訊錄</h3></div><div id="peopleList"></div></section>
+
+    <section id="editor" class="section">
+      <div class="card"><h3>✏️ 新增 / 編輯資料</h3><div class="actions"><button class="btn btn-primary" onclick="openCannedEditor()">新增客服標答</button><button class="btn btn-primary" onclick="openEditor('faq')">新增 FAQ</button><button class="btn btn-primary" onclick="openEditor('sop')">新增 SOP</button><button class="btn btn-primary" onclick="openEditor('case')">新增平台案例</button><button class="btn btn-primary" onclick="openEditor('people')">新增人員</button></div></div>
+      <div class="card"><h3>🧰 資料維護</h3><div class="actions"><button class="btn btn-light" onclick="exportData()">匯出資料 JSON</button><button class="btn btn-light" onclick="document.getElementById('importFile').click()">匯入資料 JSON</button><button class="btn btn-warn" onclick="resetData()">恢復預設資料</button><button class="btn btn-danger" onclick="clearData()">清空所有自訂資料</button></div></div>
+    </section>
+
+
+    <section id="tags" class="section">
+      <div class="card">
+        <h3>🏷️ 標籤管理</h3>
+        <p class="small">管理客服標答可使用的標籤。新增標答時仍可自由輸入新標籤；搜尋時也會搜尋標籤內容。</p>
+        <div class="form-grid">
+          <div class="form-row"><label>新增標籤</label><input id="newTagInput" placeholder="例如：支付、成功率、態度、提款" /></div>
+        </div>
+        <div class="actions"><button class="btn btn-primary" onclick="addManagedTag()">新增標籤</button></div>
+        <div id="tagManagerList" class="tag-manager-list"></div>
+      </div>
+    </section>
+
+    <section id="navSettings" class="section">
+      <div class="card">
+        <h3>🧭 導航欄設定</h3>
+        <p class="small">可設定左側兩個區塊的標題、區塊順序，以及每個導航項目的顯示名稱、排序、所屬區塊。導航欄設定固定顯示，不可隱藏。</p>
+        <div class="form-grid">
+          <div class="form-row"><label>網站標題</label><input id="settingSiteTitle" /></div>
+          <div class="form-row"><label>副標題</label><input id="settingSiteSubtitle" /></div>
+          
+        </div>
+        <h3>導航區塊設定</h3>
+        <div class="form-grid">
+          <div class="form-row"><label>一般客服區塊標題</label><input id="settingCustomerGroupTitle" /></div>
+          <div class="form-row"><label>一般客服區塊排序</label><input id="settingCustomerGroupOrder" type="number" /></div>
+          <div class="form-row"><label>管理層區塊標題</label><input id="settingManagerGroupTitle" /></div>
+          <div class="form-row"><label>管理層區塊排序</label><input id="settingManagerGroupOrder" type="number" /></div>
+        </div>
+        <h3>左側選單項目</h3>
+        <div id="navEditor"></div>
+        <div class="actions">
+          <button class="btn btn-primary" onclick="saveNavSettings()">儲存導航設定</button>
+          <button class="btn btn-warn" onclick="resetNavSettings()">恢復預設導航</button>
+        </div>
+      </div>
+    </section>
+
+    <div class="footer">包網客服知識庫 V23.0｜分區導航版</div>
+  </main>
+</div>
+
+<div id="modalBackdrop" class="modal-backdrop"><div class="modal"><h2 id="modalTitle">新增資料</h2><div class="form-row"><label>資料類型</label><select id="formType" onchange="switchFormType()"><option value="faq">客戶版 FAQ</option><option value="sop">新人內部 SOP</option><option value="case">平台案例庫</option><option value="people">人員通訊錄</option></select></div><input type="hidden" id="formId" /><div id="commonFields"><input id="formCategory" type="hidden" value="FAQ" /><div class="form-grid"><div class="form-row"><label>平台（可複選，也可直接輸入新增）</label>
+      <div class="multi-select-box">
+        <div id="selectedPlatformChips" class="chip-list"></div>
+        <input id="formPlatformInput" list="platformOptions" placeholder="輸入平台後按 Enter，例如 ME、DO、COCO777" onkeydown="handlePlatformInputKey(event)" />
+        <datalist id="platformOptions"></datalist>
+        <div id="platformOptionList" class="platform-option-list"></div>
+      </div>
+      <input id="formPlatform" type="hidden" />
+    </div></div><div class="form-row"><label>標題 / 問題</label><input id="formTitle" /></div><div class="form-row"><label>內容 / 回答 / 處理方式</label><textarea id="formContent"></textarea></div><div class="form-row"><label>原因</label><textarea id="formReason"></textarea></div><div class="form-row"><label>標籤</label><input id="formTags" list="managedTagOptions" placeholder="可選既有標籤，或輸入多個標籤用逗號分隔" /></div></div><div id="peopleFields" class="hidden"><div class="form-grid"><div class="form-row"><label>人員名稱</label><input id="personName" /></div><div class="form-row"><label>身份</label><select id="personSide"><option value="WP">WP</option><option value="客戶方">客戶方</option><option value="其他">其他</option></select></div></div><div class="form-row"><label>備註</label><input id="personNote" /></div></div><div class="actions"><button class="btn btn-primary" onclick="saveItem()">儲存</button><button class="btn btn-light" onclick="closeEditor()">取消</button></div></div></div>
+
+<div id="cannedModalBackdrop" class="modal-backdrop"><div class="modal"><h2 id="cannedModalTitle">新增客服標答</h2><input type="hidden" id="cannedId" />
+<div class="form-row"><label>大標題</label><div class="combo-wrap"><input id="cannedMainTitle" autocomplete="off" oninput="showMainSuggestions()" onfocus="showMainSuggestions()" placeholder="選擇既有或輸入新大標題" /><div id="mainSuggestions" class="suggestions"></div></div></div>
+<div class="form-row"><label>小標題</label><div class="combo-wrap"><input id="cannedSubTitle" autocomplete="off" oninput="showSubSuggestions()" onfocus="showSubSuggestions()" placeholder="選擇既有或輸入新小標題" /><div id="subSuggestions" class="suggestions"></div></div></div>
+<div class="form-row"><label>名稱</label><input id="cannedName" /></div>
+<div class="form-row"><label>標籤 Tag（選填）</label><input id="cannedTags" list="managedTagOptions" placeholder="例如：支付,成功率,態度" /><datalist id="managedTagOptions"></datalist></div>
+<div class="form-row"><label>排序</label><input id="cannedOrder" type="number" placeholder="可留空，自動排序" /></div>
+<div class="form-row"><label>內容</label><textarea id="cannedContent"></textarea></div>
+<div class="actions"><button class="btn btn-primary" onclick="saveCanned()">儲存標答</button><button class="btn btn-light" onclick="closeCannedEditor()">取消</button></div></div></div>
+<div id="toast" class="toast">已複製</div>
+
+<script>
+const STORAGE_KEY="wp_kb_v23_data";function id(){return"id_"+Math.random().toString(36).slice(2,10)+Date.now().toString(36)}
+const defaultNav=[
+{id:"canned",icon:"💬",label:"客服標答",order:1,group:"customer",visible:true,builtIn:true},
+{id:"faq",icon:"👤",label:"客戶版 FAQ",order:2,group:"customer",visible:true,builtIn:true},
+{id:"sop",icon:"🏢",label:"新人內部 SOP",order:3,group:"customer",visible:true,builtIn:true},
+{id:"cases",icon:"🗂️",label:"平台案例庫",order:4,group:"customer",visible:true,builtIn:true},
+{id:"people",icon:"👥",label:"人員通訊錄",order:1,group:"manager",visible:true,builtIn:true},
+{id:"editor",icon:"✏️",label:"新增 / 編輯資料",order:2,group:"manager",visible:true,builtIn:true},
+{id:"tags",icon:"🏷️",label:"標籤管理",order:3,group:"manager",visible:true,builtIn:true},{id:"navSettings",icon:"🧭",label:"導航欄設定",order:4,group:"manager",visible:true,builtIn:true}
+];
+const defaultData={settings:{siteTitle:"📚 WP包網客服知識庫",siteSubtitle:"ME / DO / MO / BE / COCO777 / Khelo5",heroTitle:"包網客服知識庫",heroDesc:"客服標答維持上下排列，並將內容展示在名稱旁邊，方便快速瀏覽與複製。",nav:defaultNav,groups:{customer:{title:"一般客服使用",order:1},manager:{title:"管理層設定",order:2}}},ui:{collapsedMain:{},collapsedSub:{}},managedTags:["支付","成功率","通道異常","提款","風控","活動","態度"],canned:[{id:id(),mainTitle:"支付問題",subTitle:"成功率說明",name:"同支付商成功率差異",tags:["支付","成功率"],content:"您好，這邊確認過了，即使是相同支付商，不同平台的成功率仍可能受到流量結構、支付路由、會員品質及統計口徑影響，因此數據上可能會有差異。\n\n目前從截圖上看，較不像是單純設定異常所造成，若需進一步確認，可協助核對同時段的原始訂單數據與成功率計算方式。",order:1},{id:id(),mainTitle:"查詢等待",subTitle:"請稍候",name:"正在核實",tags:["查詢","等待"],content:"您好，相關問題正在為您查詢核實中 🙏\n還請您稍候片刻，確認後會第一時間同步給您，謝謝。",order:1}],faq:[],sop:[],case:[],incident:[],people:[]};
+let data=loadData(),draggedCannedId=null;
+function migrate(d){if(!d.settings)d.settings=structuredClone(defaultData.settings);if(!d.settings.groups)d.settings.groups=structuredClone(defaultData.settings.groups);if(!d.settings.nav)d.settings.nav=structuredClone(defaultNav);if(!d.ui)d.ui={collapsedMain:{},collapsedSub:{}};if(!d.ui.mainOrder)d.ui.mainOrder={};if(!d.ui.subOrder)d.ui.subOrder={};if(!d.managedTags)d.managedTags=["支付","成功率","通道異常","提款","風控","活動","態度"];if(!d.canned)d.canned=structuredClone(defaultData.canned);d.canned.forEach(x=>{if(!x.tags)x.tags=[]});["faq","sop","case","incident","people"].forEach(k=>{if(!d[k])d[k]=[]});d.settings.nav=d.settings.nav.filter(n=>!["home","incident","salary"].includes(n.id));defaultNav.forEach(def=>{if(!d.settings.nav.some(n=>n.id===def.id))d.settings.nav.push(def)});d.settings.nav.forEach(n=>{if(n.id==="people")n.group="manager";if(n.id==="navSettings")n.visible=true;if(!n.group)n.group=["editor","navSettings","people"].includes(n.id)?"manager":"customer"});return d}
+function loadData(){const saved=localStorage.getItem(STORAGE_KEY)||localStorage.getItem("wp_kb_v22_data")||localStorage.getItem("wp_kb_v21_data")||localStorage.getItem("wp_kb_v20_data")||localStorage.getItem("wp_kb_v19_data")||localStorage.getItem("wp_kb_v18_data")||localStorage.getItem("wp_kb_v17_data")||localStorage.getItem("wp_kb_v16_data")||localStorage.getItem("wp_kb_v15_data")||localStorage.getItem("wp_kb_v14_data")||localStorage.getItem("wp_kb_v13_data")||localStorage.getItem("wp_kb_v12_data")||localStorage.getItem("wp_kb_v11_data")||localStorage.getItem("wp_kb_v10_data")||localStorage.getItem("wp_kb_v9_data")||localStorage.getItem("wp_kb_v8_data")||localStorage.getItem("wp_kb_v7_data")||localStorage.getItem("wp_kb_v6_data")||localStorage.getItem("wp_kb_v5_data");if(saved){try{return migrate(JSON.parse(saved))}catch(e){}}localStorage.setItem(STORAGE_KEY,JSON.stringify(defaultData));return structuredClone(defaultData)}
+function saveData(){localStorage.setItem(STORAGE_KEY,JSON.stringify(data));renderAll()}function esc(str){return String(str??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;"}[m]))}function nl(str){return esc(str).replace(/\n/g,"<br>")}function normalizeSearchText(value){
+  return String(value ?? "")
+    .toLowerCase()
+    .replace(/\s+/g, "")
+    .replace(/[，。！？、,.!?;；:：\-—_（）()【】\[\]「」『』"'`~]/g, "");
+}
+function match(item){
+  const raw = document.getElementById("searchInput").value.trim();
+  if(!raw) return true;
+  const haystack = normalizeSearchText(JSON.stringify(item));
+  const keywords = raw.split(/\s+/).map(normalizeSearchText).filter(Boolean);
+  return keywords.every(k => haystack.includes(k));
+}
+function renderNav(){document.getElementById("siteTitle").innerText=data.settings.siteTitle;document.getElementById("siteSubtitle").innerText=data.settings.siteSubtitle;document.getElementById("heroTitle").innerText=data.settings.heroTitle;document.getElementById("heroDesc").innerText=data.settings.heroDesc;const current=document.querySelector(".section.active")?.id||"canned";const groups=Object.entries(data.settings.groups).sort((a,b)=>(+a[1].order||0)-(+b[1].order||0));let html="";groups.forEach(([gid,g])=>{const items=data.settings.nav.filter(n=>n.visible&&n.group===gid).sort((a,b)=>(+a.order||0)-(+b.order||0));if(!items.length)return;html+=`<div class="nav-title">${esc(g.title)}</div>`;items.forEach(n=>html+=`<button class="${current===n.id?'active':''}" onclick="showSection('${esc(n.id)}')"><span>${esc(n.icon)}</span><span>${esc(n.label)}</span></button>`)});document.getElementById("sideNav").innerHTML=html}
+function showSection(id){
+document.body.className=(document.body.className||"").replace(/section-[^\s]+/g,"").trim();
+document.body.classList.add("section-"+id);
+
+document.querySelectorAll(".section").forEach(s=>s.classList.remove("active"));
+(document.getElementById(id)||document.getElementById("canned")).classList.add("active");
+const toolbar=document.querySelector(".toolbar");
+if(toolbar){toolbar.style.display = id==="navSettings" ? "none" : "flex";}
+renderNav();renderAll(false)
+}
+function groupKey(main,sub=""){return sub?`${main}|||${sub}`:main}function toggleMain(main){data.ui.collapsedMain[main]=!data.ui.collapsedMain[main];saveData()}function toggleSub(main,sub){const k=groupKey(main,sub);data.ui.collapsedSub[k]=!data.ui.collapsedSub[k];saveData()}function expandAllCanned(){data.ui.collapsedMain={};data.ui.collapsedSub={};saveData()}function collapseAllCanned(){const cms={},css={};data.canned.forEach(x=>{cms[x.mainTitle]=true;css[groupKey(x.mainTitle,x.subTitle)]=true});data.ui.collapsedMain=cms;data.ui.collapsedSub=css;saveData()}
+function getMainOrder(main){
+  if(data.ui.mainOrder[main]===undefined){
+    data.ui.mainOrder[main]=Object.keys(data.ui.mainOrder).length+1;
+  }
+  return Number(data.ui.mainOrder[main])||9999;
+}
+function getSubOrder(main,sub){
+  const k=groupKey(main,sub);
+  if(data.ui.subOrder[k]===undefined){
+    data.ui.subOrder[k]=Object.keys(data.ui.subOrder).length+1;
+  }
+  return Number(data.ui.subOrder[k])||9999;
+}
+function renderCanned(){
+ const list=data.canned.filter(match).sort((a,b)=>
+   getMainOrder(a.mainTitle||"未分類")-getMainOrder(b.mainTitle||"未分類") ||
+   getSubOrder(a.mainTitle||"未分類",a.subTitle||"未分類")-getSubOrder(b.mainTitle||"未分類",b.subTitle||"未分類") ||
+   (Number(a.order)||0)-(Number(b.order)||0)
+ );
+ const grouped={};
+ list.forEach(item=>{
+   const main=item.mainTitle||"未分類",sub=item.subTitle||"未分類";
+   grouped[main]??={};grouped[main][sub]??=[];grouped[main][sub].push(item);
+ });
+ Object.keys(grouped).forEach(main=>getMainOrder(main));
+ Object.keys(grouped).forEach(main=>Object.keys(grouped[main]).forEach(sub=>getSubOrder(main,sub)));
+ let html="";
+ Object.keys(grouped).sort((a,b)=>getMainOrder(a)-getMainOrder(b)).forEach(main=>{
+   const mainCollapsed=!!data.ui.collapsedMain[main];
+   html+=`<div class="canned-main" data-main="${esc(main)}">
+     <div class="canned-main-title" draggable="true" data-main="${esc(main)}" ondragstart="onMainTitleDragStart(event)" ondragover="onMainTitleDragOver(event)" ondrop="onMainTitleDrop(event)" ondragend="onTitleDragEnd(event)">
+       <span class="caret" onclick="event.stopPropagation();toggleMain('${esc(main)}')">${mainCollapsed?'▸':'▾'}</span>
+       <span onclick="toggleMain('${esc(main)}')">📌 ${esc(main)}</span>
+     </div>
+     <div class="${mainCollapsed?'hidden':''}">`;
+   Object.keys(grouped[main]).sort((a,b)=>getSubOrder(main,a)-getSubOrder(main,b)).forEach(sub=>{
+     const k=groupKey(main,sub),subCollapsed=!!data.ui.collapsedSub[k];
+     html+=`<div class="canned-sub-title" draggable="true" data-main="${esc(main)}" data-sub="${esc(sub)}" ondragstart="onSubTitleDragStart(event)" ondragover="onSubTitleDragOver(event)" ondrop="onSubTitleDrop(event)" ondragend="onTitleDragEnd(event)">
+       <span class="caret" onclick="event.stopPropagation();toggleSub('${esc(main)}','${esc(sub)}')">${subCollapsed?'▸':'▾'}</span>
+       <span onclick="toggleSub('${esc(main)}','${esc(sub)}')">${esc(sub)}</span>
+     </div>
+     <div class="canned-list ${subCollapsed?'hidden':''}" data-group="${esc(k)}">`;
+     grouped[main][sub].forEach(item=>{
+       html+=`<div class="canned-card" draggable="true" data-id="${esc(item.id)}" data-group="${esc(k)}" ondragstart="onCannedDragStart(event)" ondragover="onCannedDragOver(event)" ondrop="onCannedDrop(event)" ondragend="onCannedDragEnd(event)">
+         <div class="canned-head">
+           <div class="canned-titlebox">
+             <div><span class="drag-handle">☰</span> <span class="canned-name">${esc(item.name)}</span></div>
+             <div class="small">排序：${esc(item.order??"")}</div>
+             <div class="canned-tags">${(item.tags||[]).map(t=>`<span class="tag-chip">#${esc(t)}</span>`).join("")}</div>
+           </div>
+           <div class="canned-content" ondblclick="copyTextById('${esc(item.id)}')" title="雙擊可複製">${nl(item.content)}</div>
+           <div class="actions">
+             <button class="btn btn-primary btn-small" onclick="copyTextById('${esc(item.id)}')">一鍵複製</button>
+             <button class="btn btn-light btn-small" onclick="openCannedEditor('${esc(item.id)}')">編輯</button>
+             <button class="btn btn-danger btn-small" onclick="deleteCanned('${esc(item.id)}')">刪除</button>
+           </div>
+         </div>
+       </div>`;
+     });
+     html+=`</div>`;
+   });
+   html+=`</div></div>`;
+ });
+ document.getElementById("cannedList").innerHTML=html||`<div class="card">沒有符合條件的客服標答。</div>`;
+}
+function renderList(type,target){const list=data[type].filter(match);let html="";list.forEach((item,idx)=>{html+=`<details><summary><span class="qa-no">${type==="faq"?"Q"+(idx+1):esc(item.platform||"")}</span>${esc(item.title||item.name)}</summary><div class="answer">${item.reason?`<h4>原因</h4><div>${nl(item.reason)}</div>`:""}<h4>內容 / 處理方式</h4><div>${nl(item.content)}</div><div class="actions"><button class="btn btn-light btn-small" onclick="openEditor('${type}','${item.id}')">編輯</button><button class="btn btn-danger btn-small" onclick="deleteItem('${type}','${item.id}')">刪除</button></div></div></details>`});document.getElementById(target).innerHTML=html||`<div class="card">沒有符合條件的資料。</div>`}
+function renderPeople(){let html=`<div class="card"><table><tr><th>人員</th><th>身份</th><th>備註</th><th>操作</th></tr>`;data.people.filter(match).forEach(p=>html+=`<tr><td>${esc(p.name)}</td><td>${esc(p.side)}</td><td>${esc(p.note||"")}</td><td><button class="btn btn-light btn-small" onclick="openEditor('people','${p.id}')">編輯</button> <button class="btn btn-danger btn-small" onclick="deleteItem('people','${p.id}')">刪除</button></td></tr>`);html+=`</table></div>`;document.getElementById("peopleList").innerHTML=html}
+function renderNavEditor(){
+document.querySelectorAll('#settingHeroTitle,#settingHeroDesc').forEach(el=>{const row=el.closest('.form-row'); if(row) row.remove();});
+document.getElementById("settingSiteTitle").value=data.settings.siteTitle;document.getElementById("settingSiteSubtitle").value=data.settings.siteSubtitle;document.getElementById("settingCustomerGroupTitle").value=data.settings.groups.customer.title;document.getElementById("settingCustomerGroupOrder").value=data.settings.groups.customer.order;document.getElementById("settingManagerGroupTitle").value=data.settings.groups.manager.title;document.getElementById("settingManagerGroupOrder").value=data.settings.groups.manager.order;const nav=[...data.settings.nav].sort((a,b)=>(a.group||"").localeCompare(b.group||"")||(+a.order||0)-(+b.order||0));document.getElementById("navEditor").innerHTML=nav.map(n=>`<div class="nav-editor-row" data-nav-id="${esc(n.id)}"><input data-field="order" type="number" value="${esc(n.order)}"><input data-field="icon" value="${esc(n.icon)}"><input data-field="label" value="${esc(n.label)}"><select data-field="group"><option value="customer" ${n.group==="customer"?"selected":""}>一般客服</option><option value="manager" ${n.group==="manager"?"selected":""}>管理層設定</option></select>${n.id==="navSettings" ? `<span class="locked-badge">🔒 固定顯示</span>` : `<label style="display:flex;gap:6px;align-items:center;font-weight:700"><input data-field="visible" type="checkbox" ${n.visible?'checked':''} style="width:auto"> 顯示</label>`}<span class="small">內建頁面</span></div>`).join("")}
+
+function updateToolbarForSection(){
+  const activeId = document.querySelector(".section.active")?.id || "canned";
+  document.body.className=(document.body.className||"").replace(/section-[^\s]+/g,"").trim();
+  document.body.classList.add("section-"+activeId);
+
+  document.querySelectorAll(".toolbar-data-btn,.toolbar-export-btn,.toolbar-import-btn").forEach(btn=>{
+    btn.style.display = activeId === "canned" ? "none" : "";
+  });
+
+  document.querySelectorAll(".toolbar-canned-btn").forEach(btn=>{
+    btn.style.display = activeId === "faq" ? "none" : "";
+  });
+  document.querySelectorAll(".toolbar-export-btn,.toolbar-import-btn").forEach(btn=>{
+    if(activeId === "faq") btn.style.display = "none";
+  });
+}
+
+
+function renderManagedTagOptions(){
+  const list=document.getElementById("managedTagOptions");
+  if(list) list.innerHTML=(data.managedTags||[]).map(t=>`<option value="${esc(t)}"></option>`).join("");
+}
+function renderTagManager(){
+  const box=document.getElementById("tagManagerList");
+  if(!box)return;
+  const tags=[...(data.managedTags||[])].sort((a,b)=>a.localeCompare(b,"zh-Hant"));
+  box.innerHTML=tags.map(t=>`<span class="tag-manager-item">#${esc(t)} <button class="btn btn-danger btn-small" onclick="deleteManagedTag('${esc(t)}')">刪除</button></span>`).join("") || '<span class="small">尚未建立標籤。</span>';
+  renderManagedTagOptions();
+}
+function addManagedTag(){
+  const input=document.getElementById("newTagInput");
+  const val=(input.value||"").trim();
+  if(!val){alert("請輸入標籤名稱");return;}
+  if(!data.managedTags)data.managedTags=[];
+  if(!data.managedTags.includes(val))data.managedTags.push(val);
+  input.value="";
+  saveData();
+}
+function deleteManagedTag(tag){
+  if(!confirm("確定刪除此標籤嗎？已套用在標答上的標籤也會同步移除。"))return;
+  data.managedTags=(data.managedTags||[]).filter(t=>t!==tag);
+  data.canned.forEach(x=>{x.tags=(x.tags||[]).filter(t=>t!==tag)});
+  saveData();
+}
+
+function renderAll(){updateToolbarForSection();renderTagManager();renderNav();renderCanned();renderList("faq","faqList");renderList("sop","sopList");renderList("case","caseList");renderPeople();renderNavEditor()}
+
+function validateNavOrders(){
+ const seen={customer:{},manager:{}};
+ const labels={customer:"一般客服區塊",manager:"管理層設定區塊"};
+ let ok=true,msg="";
+ document.querySelectorAll(".nav-editor-row").forEach(row=>{
+   const group=row.querySelector('[data-field="group"]').value;
+   const visible = row.querySelector('[data-field="visible"]') ? row.querySelector('[data-field="visible"]').checked : true;
+   const order=String(Number(row.querySelector('[data-field="order"]').value||0));
+   const label=row.querySelector('[data-field="label"]').value.trim();
+   if(!visible) return;
+   if(seen[group][order]){
+     ok=false;
+     msg=`${labels[group]} 內排序「${order}」重複：${seen[group][order]}、${label}`;
+   }else{
+     seen[group][order]=label;
+   }
+ });
+ if(!ok){ alert(msg + "\\n\\n同一區塊內排序不可重複，請調整為 1、2、3、4 這種唯一排序。導航欄設定固定顯示，避免誤關後找不到入口。"); }
+ return ok;
+}
+function saveNavSettings(){if(!validateNavOrders())return;data.settings.siteTitle=document.getElementById("settingSiteTitle").value.trim();data.settings.siteSubtitle=document.getElementById("settingSiteSubtitle").value.trim();data.settings.groups.customer.title=document.getElementById("settingCustomerGroupTitle").value.trim()||"一般客服使用";data.settings.groups.customer.order=Number(document.getElementById("settingCustomerGroupOrder").value||1);data.settings.groups.manager.title=document.getElementById("settingManagerGroupTitle").value.trim()||"管理層設定";data.settings.groups.manager.order=Number(document.getElementById("settingManagerGroupOrder").value||2);document.querySelectorAll(".nav-editor-row").forEach(row=>{const navItem=data.settings.nav.find(n=>n.id===row.dataset.navId);if(!navItem)return;navItem.order=Number(row.querySelector('[data-field="order"]').value||0);navItem.icon=row.querySelector('[data-field="icon"]').value.trim()||"📌";navItem.label=row.querySelector('[data-field="label"]').value.trim()||navItem.label;navItem.group=row.querySelector('[data-field="group"]').value;navItem.visible = navItem.id==='navSettings' ? true : row.querySelector('[data-field="visible"]').checked});saveData();alert("導航設定已儲存")}
+function resetNavSettings(){if(!confirm("確定恢復預設導航？"))return;data.settings.nav=structuredClone(defaultNav);data.settings.groups=structuredClone(defaultData.settings.groups);saveData()}
+function openCannedEditor(itemId=null){document.getElementById("cannedModalBackdrop").style.display="flex";document.getElementById("cannedModalTitle").innerText=itemId?"編輯客服標答":"新增客服標答";document.getElementById("cannedId").value=itemId||"";["cannedMainTitle","cannedSubTitle","cannedName","cannedTags","cannedContent","cannedOrder"].forEach(i=>document.getElementById(i).value="");renderManagedTagOptions();hideSuggestions();if(itemId){const item=data.canned.find(x=>x.id===itemId);document.getElementById("cannedMainTitle").value=item.mainTitle||"";document.getElementById("cannedSubTitle").value=item.subTitle||"";document.getElementById("cannedName").value=item.name||"";document.getElementById("cannedContent").value=item.content||"";document.getElementById("cannedTags").value=(item.tags||[]).join(",");document.getElementById("cannedOrder").value=item.order??""}}
+function closeCannedEditor(){document.getElementById("cannedModalBackdrop").style.display="none";hideSuggestions()}function unique(arr){return[...new Set(arr.filter(Boolean))].sort((a,b)=>a.localeCompare(b,"zh-Hant"))}function showMainSuggestions(){const val=document.getElementById("cannedMainTitle").value.toLowerCase();const opts=unique(data.canned.map(x=>x.mainTitle)).filter(x=>x.toLowerCase().includes(val));renderSuggestions("mainSuggestions",opts,v=>{document.getElementById("cannedMainTitle").value=v;hideSuggestions();showSubSuggestions()})}function showSubSuggestions(){const main=document.getElementById("cannedMainTitle").value;const val=document.getElementById("cannedSubTitle").value.toLowerCase();let opts=data.canned.filter(x=>!main||x.mainTitle===main).map(x=>x.subTitle);opts=unique(opts).filter(x=>x.toLowerCase().includes(val));renderSuggestions("subSuggestions",opts,v=>{document.getElementById("cannedSubTitle").value=v;hideSuggestions()})}function renderSuggestions(id,opts,onPick){const box=document.getElementById(id);if(!opts.length){box.style.display="none";box.innerHTML="";return}box.innerHTML=opts.map(o=>`<div>${esc(o)}</div>`).join("");[...box.children].forEach((child,i)=>child.onclick=()=>onPick(opts[i]));box.style.display="block"}function hideSuggestions(){document.getElementById("mainSuggestions").style.display="none";document.getElementById("subSuggestions").style.display="none"}
+function saveCanned(){const itemId=document.getElementById("cannedId").value;const item={id:itemId||id(),mainTitle:document.getElementById("cannedMainTitle").value.trim(),subTitle:document.getElementById("cannedSubTitle").value.trim(),name:document.getElementById("cannedName").value.trim(),content:document.getElementById("cannedContent").value.trim(),tags:document.getElementById("cannedTags").value.split(",").map(x=>x.trim()).filter(Boolean),order:Number(document.getElementById("cannedOrder").value||0)};item.tags.forEach(t=>{if(!data.managedTags.includes(t))data.managedTags.push(t)});if(!item.mainTitle||!item.subTitle||!item.name||!item.content){alert("大標題、小標題、名稱、內容都需要填寫");return}if(!item.order){const same=data.canned.filter(x=>x.mainTitle===item.mainTitle&&x.subTitle===item.subTitle);item.order=same.length?Math.max(...same.map(x=>Number(x.order)||0))+1:1}if(itemId)data.canned[data.canned.findIndex(x=>x.id===itemId)]=item;else data.canned.push(item);saveData();closeCannedEditor()}function deleteCanned(itemId){if(!confirm("確定要刪除這則客服標答嗎？"))return;data.canned=data.canned.filter(x=>x.id!==itemId);saveData()}
+function copyTextById(itemId){const item=data.canned.find(x=>x.id===itemId);if(!item)return;navigator.clipboard.writeText(item.content).then(()=>showToast("已複製標答")).catch(()=>{const temp=document.createElement("textarea");temp.value=item.content;document.body.appendChild(temp);temp.select();document.execCommand("copy");document.body.removeChild(temp);showToast("已複製標答")})}function showToast(text){const t=document.getElementById("toast");t.innerText=text;t.style.display="block";clearTimeout(window.toastTimer);window.toastTimer=setTimeout(()=>t.style.display="none",1600)}
+
+let draggedMainTitle=null;
+let draggedSubTitle=null;
+
+function onMainTitleDragStart(e){
+  draggedMainTitle=e.currentTarget.dataset.main;
+  e.currentTarget.classList.add("canned-title-dragging");
+}
+function onMainTitleDragOver(e){e.preventDefault();}
+function onMainTitleDrop(e){
+  e.preventDefault();
+  const targetMain=e.currentTarget.dataset.main;
+  if(!draggedMainTitle || draggedMainTitle===targetMain)return;
+  const mains=[...new Set(data.canned.map(x=>x.mainTitle||"未分類"))].sort((a,b)=>getMainOrder(a)-getMainOrder(b));
+  const from=mains.indexOf(draggedMainTitle), to=mains.indexOf(targetMain);
+  if(from<0||to<0)return;
+  const [moved]=mains.splice(from,1);
+  mains.splice(to,0,moved);
+  mains.forEach((m,i)=>data.ui.mainOrder[m]=i+1);
+  saveData();
+}
+function onSubTitleDragStart(e){
+  draggedSubTitle={main:e.currentTarget.dataset.main,sub:e.currentTarget.dataset.sub};
+  e.currentTarget.classList.add("canned-title-dragging");
+}
+function onSubTitleDragOver(e){e.preventDefault();}
+function onSubTitleDrop(e){
+  e.preventDefault();
+  const targetMain=e.currentTarget.dataset.main;
+  const targetSub=e.currentTarget.dataset.sub;
+  if(!draggedSubTitle || draggedSubTitle.main!==targetMain){
+    showToast("只能在同一大標題內排序小標題");
+    return;
+  }
+  if(draggedSubTitle.sub===targetSub)return;
+  const subs=[...new Set(data.canned.filter(x=>(x.mainTitle||"未分類")===targetMain).map(x=>x.subTitle||"未分類"))].sort((a,b)=>getSubOrder(targetMain,a)-getSubOrder(targetMain,b));
+  const from=subs.indexOf(draggedSubTitle.sub), to=subs.indexOf(targetSub);
+  if(from<0||to<0)return;
+  const [moved]=subs.splice(from,1);
+  subs.splice(to,0,moved);
+  subs.forEach((s,i)=>data.ui.subOrder[groupKey(targetMain,s)]=i+1);
+  saveData();
+}
+function onTitleDragEnd(e){
+  e.currentTarget.classList.remove("canned-title-dragging");
+  draggedMainTitle=null;
+  draggedSubTitle=null;
+}
+function onCannedDragStart(e){draggedCannedId=e.currentTarget.dataset.id;e.currentTarget.classList.add("dragging")}function onCannedDragOver(e){e.preventDefault()}function onCannedDrop(e){e.preventDefault();const target=e.currentTarget,targetId=target.dataset.id,targetGroup=target.dataset.group,dragged=data.canned.find(x=>x.id===draggedCannedId);if(!dragged)return;const draggedGroup=groupKey(dragged.mainTitle,dragged.subTitle);if(draggedGroup!==targetGroup){showToast("只能在同一小標題內排序");return}const groupItems=data.canned.filter(x=>groupKey(x.mainTitle,x.subTitle)===targetGroup).sort((a,b)=>(Number(a.order)||0)-(Number(b.order)||0));const from=groupItems.findIndex(x=>x.id===draggedCannedId),to=groupItems.findIndex(x=>x.id===targetId);if(from<0||to<0||from===to)return;const[moved]=groupItems.splice(from,1);groupItems.splice(to,0,moved);groupItems.forEach((x,i)=>x.order=i+1);saveData()}function onCannedDragEnd(e){e.currentTarget.classList.remove("dragging");draggedCannedId=null}
+
+function getUniqueValuesFromData(field){
+  const values=[];
+  ["faq","sop","case","incident"].forEach(type=>{
+    (data[type]||[]).forEach(item=>{
+      if(item && item[field]) values.push(item[field]);
+    });
+  });
+  return [...new Set(values.filter(Boolean))].sort((a,b)=>a.localeCompare(b,"zh-Hant"));
+}
+
+let selectedPlatforms = [];
+
+function splitPlatforms(value){
+  return String(value||"")
+    .split(/[\/,，、\s]+/)
+    .map(x=>x.trim())
+    .filter(Boolean);
+}
+function syncPlatformHidden(){
+  const hidden=document.getElementById("formPlatform");
+  if(hidden) hidden.value = selectedPlatforms.join(" / ");
+}
+function renderSelectedPlatformChips(){
+  const box=document.getElementById("selectedPlatformChips");
+  if(!box)return;
+  box.innerHTML=selectedPlatforms.map(p=>`<span class="platform-chip">${esc(p)} <button type="button" onclick="removeSelectedPlatform('${esc(p)}')">×</button></span>`).join("");
+  syncPlatformHidden();
+}
+function addSelectedPlatform(platform){
+  const p=String(platform||"").trim();
+  if(!p)return;
+  if(!selectedPlatforms.includes(p)) selectedPlatforms.push(p);
+  const input=document.getElementById("formPlatformInput");
+  if(input) input.value="";
+  renderSelectedPlatformChips();
+}
+function removeSelectedPlatform(platform){
+  selectedPlatforms=selectedPlatforms.filter(p=>p!==platform);
+  renderSelectedPlatformChips();
+}
+function handlePlatformInputKey(event){
+  if(event.key==="Enter" || event.key==="," || event.key==="，"){
+    event.preventDefault();
+    addSelectedPlatform(event.target.value.replace(/[,，]/g,""));
+  }
+}
+function renderPlatformOptionsForForm(type="faq"){
+  const optionBox=document.getElementById("platformOptionList");
+  const datalist=document.getElementById("platformOptions");
+  if(!optionBox && !datalist)return;
+  const raw=[];
+  ["faq","sop","case","incident"].forEach(t=>{
+    (data[t]||[]).forEach(item=>splitPlatforms(item.platform).forEach(p=>raw.push(p)));
+  });
+  ["ME","DO","MO","BE","COCO777","Khelo5"].forEach(p=>raw.push(p));
+  const platforms=[...new Set(raw.filter(Boolean))].sort((a,b)=>a.localeCompare(b,"zh-Hant"));
+  if(datalist)datalist.innerHTML=platforms.map(p=>`<option value="${esc(p)}"></option>`).join("");
+  if(optionBox)optionBox.innerHTML=platforms.map(p=>`<button type="button" class="platform-option" onclick="addSelectedPlatform('${esc(p)}')">${esc(p)}</button>`).join("");
+}
+
+function renderGenericFormOptions(type="faq"){
+  const categoryList=document.getElementById("categoryOptions");
+  const platformList=document.getElementById("platformOptions");
+  const tagList=document.getElementById("managedTagOptions");
+  if(categoryList){
+    const cats=[...new Set([...(data[type]||[]).map(x=>x.category).filter(Boolean), ...getUniqueValuesFromData("category")])].sort((a,b)=>a.localeCompare(b,"zh-Hant"));
+    categoryList.innerHTML=cats.map(v=>`<option value="${esc(v)}"></option>`).join("");
+  }
+  renderPlatformOptionsForForm(type);
+  renderPlatformOptionsForForm(type);
+  if(tagList){
+    const tags=[...new Set([...(data.managedTags||[]), ...["faq","sop","case","incident"].flatMap(t=>(data[t]||[]).flatMap(x=>x.tags||[]))])].sort((a,b)=>a.localeCompare(b,"zh-Hant"));
+    tagList.innerHTML=tags.map(v=>`<option value="${esc(v)}"></option>`).join("");
+  }
+}
+
+function openEditor(type="faq",itemId=null){document.getElementById("modalBackdrop").style.display="flex";document.getElementById("formType").value=type;document.getElementById("formId").value=itemId||"";clearForm();switchFormType();selectedPlatforms=[];document.getElementById("modalTitle").innerText=itemId?"編輯資料":"新增資料";renderGenericFormOptions(type);renderSelectedPlatformChips();if(itemId){const item=data[type].find(x=>x.id===itemId);if(type==="people"){document.getElementById("personName").value=item.name||"";document.getElementById("personSide").value=item.side||"WP";document.getElementById("personNote").value=item.note||""}else{document.getElementById("formCategory").value=item.category||"";selectedPlatforms=splitPlatforms(item.platform||"");renderSelectedPlatformChips();document.getElementById("formTitle").value=item.title||"";document.getElementById("formContent").value=item.content||"";document.getElementById("formReason").value=item.reason||"";document.getElementById("formTags").value=(item.tags||[]).join(", ")}}}
+function closeEditor(){document.getElementById("modalBackdrop").style.display="none"}function clearForm(){selectedPlatforms=[];["formCategory","formPlatform","formTitle","formContent","formReason","formTags","personName","personNote"].forEach(id=>document.getElementById(id).value="");document.getElementById("personSide").value="WP"}function switchFormType(){const type=document.getElementById("formType").value;document.getElementById("commonFields").classList.toggle("hidden",type==="people");document.getElementById("peopleFields").classList.toggle("hidden",type!=="people")}function saveItem(){const type=document.getElementById("formType").value,itemId=document.getElementById("formId").value;let item;if(type==="people"){item={id:itemId||id(),name:document.getElementById("personName").value.trim(),side:document.getElementById("personSide").value,note:document.getElementById("personNote").value.trim()};if(!item.name){alert("請輸入人員名稱");return}}else{item={id:itemId||id(),category:document.getElementById("formCategory").value.trim(),platform:(selectedPlatforms.length?selectedPlatforms.join(" / "):document.getElementById("formPlatformInput")?.value.trim()||document.getElementById("formPlatform").value.trim()),title:document.getElementById("formTitle").value.trim(),content:document.getElementById("formContent").value.trim(),reason:document.getElementById("formReason").value.trim(),tags:document.getElementById("formTags").value.split(",").map(x=>x.trim()).filter(Boolean)};item.tags.forEach(t=>{if(data.managedTags&&!data.managedTags.includes(t))data.managedTags.push(t)});if(!item.title||!item.content){alert("標題與內容都需要填寫");return}}if(itemId)data[type][data[type].findIndex(x=>x.id===itemId)]=item;else data[type].push(item);saveData();closeEditor()}function deleteItem(type,itemId){if(!confirm("確定要刪除這筆資料嗎？"))return;data[type]=data[type].filter(x=>x.id!==itemId);saveData()}
+function exportData(){const blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"});const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="包網客服知識庫_V23資料備份.json";a.click();URL.revokeObjectURL(a.href)}function importData(event){const file=event.target.files[0];if(!file)return;const reader=new FileReader();reader.onload=e=>{try{const imported=migrate(JSON.parse(e.target.result));if(confirm("匯入後會覆蓋目前資料，確定嗎？")){data=imported;saveData();alert("匯入完成")}}catch(err){alert("讀取失敗，請確認 JSON 檔案格式")}};reader.readAsText(file);event.target.value=""}function resetData(){if(confirm("確定恢復預設資料？目前修改會被覆蓋。")){data=structuredClone(defaultData);saveData()}}function clearData(){if(confirm("確定清空所有資料？建議先匯出備份。")){data=structuredClone(defaultData);data.canned=[];data.faq=[];data.sop=[];data.case=[];data.incident=[];data.people=[];saveData()}}
+window.onclick=function(e){if(e.target===document.getElementById("modalBackdrop"))closeEditor();if(e.target===document.getElementById("cannedModalBackdrop"))closeCannedEditor();if(!e.target.closest(".combo-wrap"))hideSuggestions()}
+renderAll();
+</script>
+
+<script>
+/* ===== V25 FAQ重構 ===== */
+if(!data.ui.faqMainOrder) data.ui.faqMainOrder={};
+if(!data.ui.faqItemOrder) data.ui.faqItemOrder={};
+
+function getFaqMain(title){
+  return (title && title.trim()) || "未分類";
+}
+function getFaqMainOrder(title){
+  title=getFaqMain(title);
+  if(data.ui.faqMainOrder[title]===undefined){
+    data.ui.faqMainOrder[title]=Object.keys(data.ui.faqMainOrder).length+1;
+  }
+  return data.ui.faqMainOrder[title];
+}
+function getFaqItemOrder(item){
+  if(data.ui.faqItemOrder[item.id]===undefined){
+    data.ui.faqItemOrder[item.id]=999;
+  }
+  return data.ui.faqItemOrder[item.id];
+}
+
+let draggedFaqMain=null;
+let draggedFaqItem=null;
+
+function renderFaqListV25(){
+  const box=document.getElementById("faqList");
+  if(!box) return;
+
+  const list=(data.faq||[]).filter(match);
+
+  const grouped={};
+  list.forEach(x=>{
+    const main=getFaqMain(x.mainTitle || x.category);
+    grouped[main] ??= [];
+    grouped[main].push(x);
+  });
+
+  let html="";
+
+  Object.keys(grouped)
+    .sort((a,b)=>getFaqMainOrder(a)-getFaqMainOrder(b))
+    .forEach(main=>{
+
+      html+=`
+      <div style="margin-bottom:18px">
+        <div class="canned-main-title"
+             draggable="true"
+             data-faq-main="${main}"
+             ondragstart="faqMainDragStart(event)"
+             ondragover="event.preventDefault()"
+             ondrop="faqMainDrop(event)">
+          📌 ${main}
+        </div>`;
+
+      grouped[main]
+        .sort((a,b)=>getFaqItemOrder(a)-getFaqItemOrder(b))
+        .forEach((item,idx)=>{
+
+          html+=`
+          <details draggable="true"
+                   data-faq-id="${item.id}"
+                   data-faq-main="${main}"
+                   ondragstart="faqItemDragStart(event)"
+                   ondragover="event.preventDefault()"
+                   ondrop="faqItemDrop(event)">
+            <summary>
+              <span class="drag-handle">☰</span>
+              <span class="qa-no">Q${idx+1}</span>
+              ${item.title||""}
+            </summary>
+            <div class="answer">
+              ${item.reason ? `<h4>原因</h4><div>${item.reason}</div>` : ""}
+              <h4>內容</h4>
+              <div>${item.content||""}</div>
+              ${(item.tags||[]).length ? `<div style="margin-top:10px">${item.tags.map(t=>'<span class="tag-chip">#'+t+'</span>').join('')}</div>`:''}
+              <div class="actions" style="margin-top:12px">
+                <button class="btn btn-light btn-small" onclick="openEditor('faq','${item.id}')">編輯</button>
+                <button class="btn btn-danger btn-small" onclick="deleteItem('faq','${item.id}')">刪除</button>
+              </div>
+            </div>
+          </details>`;
+      });
+
+      html+="</div>";
+    });
+
+  box.innerHTML = html || '<div class="card">沒有符合條件的 FAQ。</div>';
+}
+
+function faqMainDragStart(e){
+  draggedFaqMain=e.currentTarget.dataset.faqMain;
+}
+function faqMainDrop(e){
+  const target=e.currentTarget.dataset.faqMain;
+  if(!draggedFaqMain || draggedFaqMain===target) return;
+
+  const arr=[...new Set((data.faq||[]).map(x=>getFaqMain(x.mainTitle)))]
+      .sort((a,b)=>getFaqMainOrder(a)-getFaqMainOrder(b));
+
+  const from=arr.indexOf(draggedFaqMain);
+  const to=arr.indexOf(target);
+
+  const m=arr.splice(from,1)[0];
+  arr.splice(to,0,m);
+
+  arr.forEach((x,i)=>data.ui.faqMainOrder[x]=i+1);
+  saveData();
+}
+
+function faqItemDragStart(e){
+  draggedFaqItem=e.currentTarget.dataset.faqId;
+}
+function faqItemDrop(e){
+  const targetId=e.currentTarget.dataset.faqId;
+
+  const drag=(data.faq||[]).find(x=>x.id===draggedFaqItem);
+  const target=(data.faq||[]).find(x=>x.id===targetId);
+
+  if(!drag || !target) return;
+
+  if(getFaqMain(drag.mainTitle || drag.category)!==getFaqMain(target.mainTitle || target.category)){
+    showToast("只能在同一大標題內排序");
+    return;
+  }
+
+  const main=getFaqMain(drag.mainTitle || drag.category);
+
+  const group=(data.faq||[])
+      .filter(x=>getFaqMain(x.mainTitle)===main)
+      .sort((a,b)=>getFaqItemOrder(a)-getFaqItemOrder(b));
+
+  const from=group.findIndex(x=>x.id===drag.id);
+  const to=group.findIndex(x=>x.id===target.id);
+
+  const m=group.splice(from,1)[0];
+  group.splice(to,0,m);
+
+  group.forEach((x,i)=>data.ui.faqItemOrder[x.id]=i+1);
+  saveData();
+}
+
+const oldOpenEditor=openEditor;
+openEditor=function(type="faq",itemId=null){
+  oldOpenEditor(type,itemId);
+
+  if(type==="faq"){
+    const catRow=document.getElementById("formCategory").closest(".form-row");
+    if(catRow && !document.getElementById("faqMainTitle")){
+      catRow.insertAdjacentHTML("beforebegin",
+        '<div class="form-row"><label>大標題</label><input id="faqMainTitle" placeholder="支付問題、提款問題..."></div>'
+      );
+    }
+
+    if(itemId){
+      const item=(data.faq||[]).find(x=>x.id===itemId);
+      if(item && document.getElementById("faqMainTitle")){
+        document.getElementById("faqMainTitle").value=item.mainTitle||"";
+      }
+    }
+  }
+}
+
+const oldSaveItem=saveItem;
+saveItem=function(){
+  const type=document.getElementById("formType").value;
+
+  if(type==="faq"){
+    const oldId=document.getElementById("formId").value;
+    const mainTitle=document.getElementById("faqMainTitle")?.value || "";
+
+    if(oldId){
+      const item=data.faq.find(x=>x.id===oldId);
+      if(item) item.mainTitle=mainTitle;
+    }
+  }
+
+  oldSaveItem();
+
+  if(type==="faq"){
+    const last=data.faq[data.faq.length-1];
+    if(last && document.getElementById("faqMainTitle")){
+      last.mainTitle=document.getElementById("faqMainTitle").value||"";
+      localStorage.setItem(STORAGE_KEY,JSON.stringify(data));
+    }
+  }
+}
+
+const oldRenderAll=renderAll;
+renderAll=function(){
+  oldRenderAll();
+  renderFaqListV25();
+}
+</script>
+
+</body></html>
