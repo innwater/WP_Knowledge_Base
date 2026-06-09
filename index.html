@@ -276,6 +276,29 @@ body.section-faq .toolbar-import-btn{
   color:var(--brand-dark);
 }
 
+/* V26.2 - 修復客服標答彈窗顯示 */
+#cannedModalBackdrop{
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 99999 !important;
+  display: none;
+  background: rgba(0,0,0,.35) !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 20px !important;
+}
+
+#cannedModalBackdrop .modal{
+  display: block !important;
+  background: #fff !important;
+  width: 100% !important;
+  max-width: 760px !important;
+  max-height: calc(100vh - 40px) !important;
+  overflow: auto !important;
+  border-radius: 20px !important;
+  padding: 22px !important;
+  box-shadow: 0 20px 60px rgba(0,0,0,.25) !important;
+}
 </style>
 </head>
 <body>
@@ -587,7 +610,38 @@ function validateNavOrders(){
 }
 function saveNavSettings(){if(!validateNavOrders())return;data.settings.siteTitle=document.getElementById("settingSiteTitle").value.trim();data.settings.siteSubtitle=document.getElementById("settingSiteSubtitle").value.trim();data.settings.groups.customer.title=document.getElementById("settingCustomerGroupTitle").value.trim()||"一般客服使用";data.settings.groups.customer.order=Number(document.getElementById("settingCustomerGroupOrder").value||1);data.settings.groups.manager.title=document.getElementById("settingManagerGroupTitle").value.trim()||"管理層設定";data.settings.groups.manager.order=Number(document.getElementById("settingManagerGroupOrder").value||2);document.querySelectorAll(".nav-editor-row").forEach(row=>{const navItem=data.settings.nav.find(n=>n.id===row.dataset.navId);if(!navItem)return;navItem.order=Number(row.querySelector('[data-field="order"]').value||0);navItem.icon=row.querySelector('[data-field="icon"]').value.trim()||"📌";navItem.label=row.querySelector('[data-field="label"]').value.trim()||navItem.label;navItem.group=row.querySelector('[data-field="group"]').value;navItem.visible = navItem.id==='navSettings' ? true : row.querySelector('[data-field="visible"]').checked});saveData();alert("導航設定已儲存")}
 function resetNavSettings(){if(!confirm("確定恢復預設導航？"))return;data.settings.nav=structuredClone(defaultNav);data.settings.groups=structuredClone(defaultData.settings.groups);saveData()}
-function openCannedEditor(itemId=null){document.getElementById("cannedModalBackdrop").style.display="flex";document.getElementById("cannedModalTitle").innerText=itemId?"編輯客服標答":"新增客服標答";document.getElementById("cannedId").value=itemId||"";["cannedMainTitle","cannedSubTitle","cannedName","cannedTags","cannedContent","cannedOrder"].forEach(i=>document.getElementById(i).value="");renderManagedTagOptions();hideSuggestions();if(itemId){const item=data.canned.find(x=>x.id===itemId);document.getElementById("cannedMainTitle").value=item.mainTitle||"";document.getElementById("cannedSubTitle").value=item.subTitle||"";document.getElementById("cannedName").value=item.name||"";document.getElementById("cannedContent").value=item.content||"";document.getElementById("cannedTags").value=(item.tags||[]).join(",");document.getElementById("cannedOrder").value=item.order??""}}
+function openCannedEditor(itemId=null){
+  const modal=document.getElementById("cannedModalBackdrop");
+  if(!modal){
+    alert("找不到客服標答彈窗");
+    return;
+  }
+
+  modal.style.display="flex";
+
+  document.getElementById("cannedModalTitle").innerText =
+    itemId ? "編輯客服標答" : "新增客服標答";
+
+  document.getElementById("cannedId").value=itemId || "";
+
+  ["cannedMainTitle","cannedSubTitle","cannedName","cannedTags","cannedContent","cannedOrder"]
+  .forEach(id=>{
+    const el=document.getElementById(id);
+    if(el) el.value="";
+  });
+
+  if(itemId){
+    const item=data.canned.find(x=>x.id===itemId);
+    if(item){
+      document.getElementById("cannedMainTitle").value=item.mainTitle||"";
+      document.getElementById("cannedSubTitle").value=item.subTitle||"";
+      document.getElementById("cannedName").value=item.name||"";
+      document.getElementById("cannedContent").value=item.content||"";
+      document.getElementById("cannedTags").value=(item.tags||[]).join(",");
+      document.getElementById("cannedOrder").value=item.order||"";
+    }
+  }
+}
 function closeCannedEditor(){document.getElementById("cannedModalBackdrop").style.display="none";hideSuggestions()}function unique(arr){return[...new Set(arr.filter(Boolean))].sort((a,b)=>a.localeCompare(b,"zh-Hant"))}function showMainSuggestions(){const val=document.getElementById("cannedMainTitle").value.toLowerCase();const opts=unique(data.canned.map(x=>x.mainTitle)).filter(x=>x.toLowerCase().includes(val));renderSuggestions("mainSuggestions",opts,v=>{document.getElementById("cannedMainTitle").value=v;hideSuggestions();showSubSuggestions()})}function showSubSuggestions(){const main=document.getElementById("cannedMainTitle").value;const val=document.getElementById("cannedSubTitle").value.toLowerCase();let opts=data.canned.filter(x=>!main||x.mainTitle===main).map(x=>x.subTitle);opts=unique(opts).filter(x=>x.toLowerCase().includes(val));renderSuggestions("subSuggestions",opts,v=>{document.getElementById("cannedSubTitle").value=v;hideSuggestions()})}function renderSuggestions(id,opts,onPick){const box=document.getElementById(id);if(!opts.length){box.style.display="none";box.innerHTML="";return}box.innerHTML=opts.map(o=>`<div>${esc(o)}</div>`).join("");[...box.children].forEach((child,i)=>child.onclick=()=>onPick(opts[i]));box.style.display="block"}function hideSuggestions(){document.getElementById("mainSuggestions").style.display="none";document.getElementById("subSuggestions").style.display="none"}
 function saveCanned(){const itemId=document.getElementById("cannedId").value;const item={id:itemId||id(),mainTitle:document.getElementById("cannedMainTitle").value.trim(),subTitle:document.getElementById("cannedSubTitle").value.trim(),name:document.getElementById("cannedName").value.trim(),content:document.getElementById("cannedContent").value.trim(),tags:document.getElementById("cannedTags").value.split(",").map(x=>x.trim()).filter(Boolean),order:Number(document.getElementById("cannedOrder").value||0)};item.tags.forEach(t=>{if(!data.managedTags.includes(t))data.managedTags.push(t)});if(!item.mainTitle||!item.subTitle||!item.name||!item.content){alert("大標題、小標題、名稱、內容都需要填寫");return}if(!item.order){const same=data.canned.filter(x=>x.mainTitle===item.mainTitle&&x.subTitle===item.subTitle);item.order=same.length?Math.max(...same.map(x=>Number(x.order)||0))+1:1}if(itemId)data.canned[data.canned.findIndex(x=>x.id===itemId)]=item;else data.canned.push(item);saveData();closeCannedEditor()}function deleteCanned(itemId){if(!confirm("確定要刪除這則客服標答嗎？"))return;data.canned=data.canned.filter(x=>x.id!==itemId);saveData()}
 function copyTextById(itemId){const item=data.canned.find(x=>x.id===itemId);if(!item)return;navigator.clipboard.writeText(item.content).then(()=>showToast("已複製標答")).catch(()=>{const temp=document.createElement("textarea");temp.value=item.content;document.body.appendChild(temp);temp.select();document.execCommand("copy");document.body.removeChild(temp);showToast("已複製標答")})}function showToast(text){const t=document.getElementById("toast");t.innerText=text;t.style.display="block";clearTimeout(window.toastTimer);window.toastTimer=setTimeout(()=>t.style.display="none",1600)}
