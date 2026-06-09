@@ -309,7 +309,18 @@ body.section-faq .toolbar-import-btn{
       <div id="cannedList"></div>
     </section>
 
-    <section id="faq" class="section"><div class="card"><h3>👤 客戶版 FAQ</h3></div><div id="faqList"></div></section>
+    <section id="faq" class="section">
+<div class="card">
+<h3>👤 客戶版 FAQ</h3>
+
+<div class="actions" style="margin-top:12px;">
+    <button class="btn btn-light" onclick="expandAllFaq()">全部展開</button>
+    <button class="btn btn-light" onclick="collapseAllFaq()">全部收合</button>
+</div>
+
+</div>
+
+<div id="faqList"></div></section>
     <section id="sop" class="section"><div class="card"><h3>🏢 新人內部 SOP</h3></div><div id="sopList"></div></section>
     <section id="cases" class="section"><div class="card"><h3>🗂️ 平台案例庫</h3></div><div id="caseList"></div></section>
     <section id="people" class="section"><div class="card"><h3>👥 人員通訊錄</h3></div><div id="peopleList"></div></section>
@@ -734,6 +745,19 @@ function getFaqItemOrder(item){
 function toggleFaqMain(main){
   main = getFaqMain(main);
   data.ui.collapsedFaqMain[main] = !data.ui.collapsedFaqMain[main];
+  saveData();
+}
+function expandAllFaq(){
+  (data.faq||[]).forEach(item=>{
+    data.ui.collapsedFaqMain[getFaqMain(item.category)] = false;
+  });
+  saveData();
+}
+
+function collapseAllFaq(){
+  (data.faq||[]).forEach(item=>{
+    data.ui.collapsedFaqMain[getFaqMain(item.category)] = true;
+  });
   saveData();
 }
 
