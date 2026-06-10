@@ -615,6 +615,7 @@ const normalModal=document.getElementById("modalBackdrop");
 if(normalModal) normalModal.style.display="none";
 
 const modal=document.getElementById("cannedModalBackdrop");
+document.body.appendChild(modal);
 if(modal){
   modal.style.cssText = `
     display:flex !important;
