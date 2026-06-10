@@ -299,18 +299,26 @@ body.section-faq .toolbar-import-btn{
   padding: 22px !important;
   box-shadow: 0 20px 60px rgba(0,0,0,.25) !important;
 }
+/* ===== V26.5 介面修正整理版 =====
+1. 移除頂部工具列「新增資料」按鈕
+2. FAQ 新增資料移至 FAQ 卡片內
+3. FAQ 支援全部展開 / 全部收合
+4. FAQ 標題卡片與內容區塊樣式統一
+5. 客服標答彈窗修復（層級 / 顯示問題）
+6. 客服標答與 FAQ 彈窗互斥顯示
+================================ */
 </style>
 </head>
 <body>
 <div class="app">
   <aside class="sidebar">
     <div class="logo" id="siteTitle">📚 包網客服知識庫</div>
-    <div class="version" id="siteSubtitle">V25.2 FAQ修正版｜ME / DO / MO / BE / COCO777</div>
+    <div class="version" id="siteSubtitle">V26.5 介面修正整理版｜ME / DO / MO / BE / COCO777</div>
     <div class="nav" id="sideNav"></div>
   </aside>
   <main class="main">
     <div class="hero">
-      <h1 id="heroTitle">包網客服知識庫 V23.0</h1>
+      <h1 id="heroTitle">包網客服知識庫 V26.5</h1>
       <p id="heroDesc">客服標答維持上下排列，並將內容展示在名稱旁邊，方便快速瀏覽與複製。</p>
       <div class="small" style="margin-top:10px">資料儲存在目前瀏覽器 LocalStorage。要換電腦或分享給別人，請先匯出 JSON。</div>
     </div>
@@ -399,7 +407,7 @@ body.section-faq .toolbar-import-btn{
       </div>
     </section>
 
-    <div class="footer">包網客服知識庫 V23.0｜分區導航版</div>
+    <div class="footer">包網客服知識庫 V26.5｜分區導航版</div>
   </main>
 </div>
 
@@ -615,6 +623,7 @@ const normalModal=document.getElementById("modalBackdrop");
 if(normalModal) normalModal.style.display="none";
 
 const modal=document.getElementById("cannedModalBackdrop");
+// V26.4 修復：客服標答彈窗原本被包在 modalBackdrop 裡，移回 body 才能正常顯示
 document.body.appendChild(modal);
 if(modal){
   modal.style.cssText = `
