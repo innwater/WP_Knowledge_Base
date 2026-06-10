@@ -611,14 +611,21 @@ function validateNavOrders(){
 function saveNavSettings(){if(!validateNavOrders())return;data.settings.siteTitle=document.getElementById("settingSiteTitle").value.trim();data.settings.siteSubtitle=document.getElementById("settingSiteSubtitle").value.trim();data.settings.groups.customer.title=document.getElementById("settingCustomerGroupTitle").value.trim()||"一般客服使用";data.settings.groups.customer.order=Number(document.getElementById("settingCustomerGroupOrder").value||1);data.settings.groups.manager.title=document.getElementById("settingManagerGroupTitle").value.trim()||"管理層設定";data.settings.groups.manager.order=Number(document.getElementById("settingManagerGroupOrder").value||2);document.querySelectorAll(".nav-editor-row").forEach(row=>{const navItem=data.settings.nav.find(n=>n.id===row.dataset.navId);if(!navItem)return;navItem.order=Number(row.querySelector('[data-field="order"]').value||0);navItem.icon=row.querySelector('[data-field="icon"]').value.trim()||"📌";navItem.label=row.querySelector('[data-field="label"]').value.trim()||navItem.label;navItem.group=row.querySelector('[data-field="group"]').value;navItem.visible = navItem.id==='navSettings' ? true : row.querySelector('[data-field="visible"]').checked});saveData();alert("導航設定已儲存")}
 function resetNavSettings(){if(!confirm("確定恢復預設導航？"))return;data.settings.nav=structuredClone(defaultNav);data.settings.groups=structuredClone(defaultData.settings.groups);saveData()}
 function openCannedEditor(itemId=null){
-  document.getElementById("modalBackdrop").style.display="none";
-  const modal=document.getElementById("cannedModalBackdrop");
+const normalModal=document.getElementById("modalBackdrop");
+if(normalModal) normalModal.style.display="none";
+
+const modal=document.getElementById("cannedModalBackdrop");
+if(modal){
+  modal.style.display="flex";
+  modal.style.visibility="visible";
+  modal.style.opacity="1";
+  modal.style.pointerEvents="auto";
+}
   if(!modal){
     alert("找不到客服標答彈窗");
     return;
   }
 
-  modal.style.display="flex";
 
   document.getElementById("cannedModalTitle").innerText =
     itemId ? "編輯客服標答" : "新增客服標答";
